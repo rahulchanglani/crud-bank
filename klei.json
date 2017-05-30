@@ -1,0 +1,4 @@
+{
+  "name": "crudBank",
+  "parts": ["express", "mongo", "angular", "stylus"]
+}

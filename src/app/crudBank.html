@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="crudBank">
+  <head>
+    <meta charset="utf-8"/>
+    <title>crudBank</title>
+    <!-- injector:css -->
+    <link rel="stylesheet" href="/css/crudBank.css">
+    <link rel="stylesheet" href="/css/todo/todo.css">
+    <!-- endinjector -->
+  </head>
+  <body>
+    <hgroup>
+      <h1>crudBank</h1>
+      <h2>Your new klei module is now ready...</h2>
+    </hgroup>
+    <ng-view></ng-view>
+    <!-- injector:js -->
+    <script src="/angular/angular.js"></script>
+    <script src="/angular-route/angular-route.js"></script>
+    <script src="/lodash/dist/lodash.compat.js"></script>
+    <script src="/restangular/dist/restangular.min.js"></script>
+    <script src="/crudBank.js"></script>
+    <script src="/todo/index.js"></script>
+    <script src="/todo/TodoCtrl.js"></script>
+    <script src="/crudBankTemplates.js"></script>
+    <!-- endinjector -->
+  </body>
+</html>

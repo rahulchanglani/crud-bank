@@ -1,0 +1,30 @@
+{
+  "name": "km-crud-bank",
+  "main": [
+    "/dist/km-crud-bank.js",
+    "/dist/km-crud-bank.css"
+  ],
+  "version": "0.1.0",
+  "description": "TODO",
+  "authors": [
+    "TODO"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.7",
+    "angular-route": "~1.2.7",
+    "restangular": "~1.2.2"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.7"
+  },
+  "resolutions": {
+    "angular": "~1.2.7"
+  }
+}
