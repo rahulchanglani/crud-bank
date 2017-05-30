@@ -4,13 +4,20 @@ var mongoose = require('mongoose'),
 /* POST /api/transactions */
 exports.create = function (req, res) {
   var transactions = new Transactions(req.body);
-  transactions.save(function (err) {
+  // amount, transactionType, occuranceTime, accountId
+  if(req.session.user) {
+    transactions.save(function (err) {
     if (err) {
-      res.send(400, err);
+      res.status(400).send({status: 'failed', message: 'Error while transacting..' + err});
     } else {
       res.send(transactions);
     }
   });
+}
+else {
+    res.status(401).send({status: 'failed', message: 'Session has expired !! Login again..'});  
+}
+  
 };
 
 /* GET /api/transactions */

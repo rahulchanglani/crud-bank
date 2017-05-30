@@ -125,7 +125,7 @@ exports.read = function (req, res) {
           })
       }
       else {
-        res.status(400).send({ status: 'failed', message: 'Session has expired !! Login again..' });
+        res.status(401).send({ status: 'failed', message: 'Session has expired !! Login again..' });
       }
     }
   });
