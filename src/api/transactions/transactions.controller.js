@@ -1,23 +1,47 @@
 var mongoose = require('mongoose'),
-    Transactions = mongoose.model('transactions');
+  Transactions = mongoose.model('transactions'),
+  Accounts = mongoose.model('accounts');
 
 /* POST /api/transactions */
 exports.create = function (req, res) {
   var transactions = new Transactions(req.body);
   // amount, transactionType, occuranceTime, accountId
-  if(req.session.user) {
-    transactions.save(function (err) {
-    if (err) {
-      res.status(400).send({status: 'failed', message: 'Error while transacting..' + err});
-    } else {
-      res.send(transactions);
-    }
-  });
-}
-else {
-    res.status(401).send({status: 'failed', message: 'Session has expired !! Login again..'});  
-}
-  
+  if (req.session.user) {
+    transactions.accountId = req.session.user.accountId;
+    Accounts
+      .findById(req.session.user.accountId, function (err, account) {
+        if (err) {
+          res.status(400).send({ status: 'failed', message: 'Error while finding a/c...' + err });
+        }
+        if (req.body.transactionType == 'deposit') {
+          account.balance += req.body.amount;
+        } else if (req.body.transactionType == 'withdrawal') {
+          if (account.balance > 0 && account.balance >= req.body.amount) {
+            account.balance -= req.body.amount;
+          }
+          else {
+            res.status(400).send({ status: 'failed', message: 'Error while withdrawal !! Insufficient balance.. ' });
+          }
+        }
+        transactions.save(function (err) {
+          if (err) {
+            res.status(400).send({ status: 'failed', message: 'Error while transacting..' + err });
+          } else {
+            account.transactions.push(mongoose.Types.ObjectId(transactions._id));
+            account.save(function (err, updatedAccount) {
+              if (err) {
+                res.status(400).send({ status: 'failed', message: 'Error while saving account..' + err });
+              }
+              res.status(200).send({ status: 'success', message: 'Transaction done successfully ! New Balance = ' + updatedAccount.balance + ' ' + updatedAccount.currencyType });
+            });
+          }
+        });
+      });
+  }
+  else {
+    res.status(401).send({ status: 'failed', message: 'Session has expired !! Login again..' });
+  }
+
 };
 
 /* GET /api/transactions */
@@ -36,7 +60,7 @@ exports.read = function (req, res) {
 /* PUT /api/transactions/:id */
 exports.update = function (req, res) {
   var id = req.params.id,
-      data = req.body;
+    data = req.body;
 
   delete data._id; // Just in case...
 
@@ -44,7 +68,7 @@ exports.update = function (req, res) {
     if (err) {
       res.send(400, err);
     } else {
-      res.send({success: true, msg: 'saved'});
+      res.send({ success: true, msg: 'saved' });
     }
   });
 };
@@ -63,7 +87,7 @@ exports.del = function (req, res) {
         if (err) {
           res.send(400, err);
         } else {
-          res.send({success: true, msg: 'removed'});
+          res.send({ success: true, msg: 'removed' });
         }
       });
     }

@@ -82,13 +82,15 @@ exports.postLogin = function (req, res) {
       // var authenticated = bcrypt.compareSync(req.body.password, user.password);
       var authenticated = true;
       if (authenticated == true) {
-        var token = jwt.sign(user, config.secret, {
+        var token = '';
+        token = jwt.sign(user, config.secret, {
           expiresIn: 600 // expires in 10 min
         });
         //         jwt.sign({
         //   data: 'foobar'
         // }, 'secret', { expiresIn: 60 * 60 });
         console.log('access token session----->', token);
+        
         user.accessToken = token;
         user.save(function (err) {
           if (err) {
@@ -106,7 +108,7 @@ exports.postLogin = function (req, res) {
 };
 
 
-/* GET /api/accounts */
+/* GET /api/accounts get balance */
 exports.read = function (req, res) {
   console.log('---', req.session);
   Accounts.findById(req.params.id, function (err, accounts) {
@@ -121,11 +123,18 @@ exports.read = function (req, res) {
             if (err) {
               res.status(400).send({ status: 'failed', message: 'Error during fing user by token::' + err });
             }
-            res.status(200).send({ status: userObj.name + ', the remaining balance in your ' + accounts.accountType + ' A/c is ' + accounts.currencyType + ' ' + accounts.balance.toFixed(2) + ' !!' });
+            res.status(200).send({ status: userObj.name + ', the remaining balance in your ' + accounts.accountType + ' A/c is ' + accounts.currencyType + ' ' + accounts.balance + ' !!' });
           })
       }
       else {
-        res.status(401).send({ status: 'failed', message: 'Session has expired !! Login again..' });
+        // Users
+        //   .unsetUsrAccessToken(req.params.id, function (err, userObj) {
+        //     if(err) {
+        //       res.status(400).send({ status: 'failed', message: 'Error during unsetting user token::' + err });              
+        //     }
+        //     console.log('updated user---',userObj)
+            res.status(401).send({ status: 'failed', message: 'Session has expired !! Login again..' });        
+          // })
       }
     }
   });

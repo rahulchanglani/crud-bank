@@ -58,6 +58,15 @@ module.exports = function (mongoose, name) {
     });
   });
 
+  userSchema.static('unsetUsrAccessToken', function (user, cb) {
+    this.update({'accountId': user.accountId}, {$set: {'accessToken': ''}}, function (err, updatedUser) {
+      if (err || !updatedUser) {
+        cb(err);
+      }
+      cb(null, updatedUser);
+    });
+  });
+
   mongoose.model(name, userSchema);
 };
 
