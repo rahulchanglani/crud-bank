@@ -2,6 +2,14 @@ var mongoose = require('mongoose'),
   Transactions = mongoose.model('transactions'),
   Accounts = mongoose.model('accounts');
 
+var Promise = require('bluebird');
+Promise.promisifyAll(Accounts);
+Promise.promisifyAll(Transactions);
+var config = require('../../config');
+var jwt = require('jsonwebtoken');
+
+
+
 /* POST /api/transactions Deposit or withdrawal */
 exports.create = function (req, res) {
   var transactions = new Transactions(req.body);

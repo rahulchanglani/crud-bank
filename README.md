@@ -141,13 +141,18 @@ O/p - SUCCESS
   }
 }
 
-6
-POST localhost:7000/api/accounts/add-beneficiary
-POST localhost:7000/api/accounts/remove-beneficiary
-
+6  Add beneficiary
+POST localhost:7000/api/beneficiaries
 {
 	"accountId": "ryrFJl3bZ",
-	"beneficiaryUserId": "592e35caacc96731cfd8e9cb",
-	"beneficiaryAccountId": "SkmRH3jbZ"
+  "transactionLimit": 10000
 }
+
+
+7 Remove beneficiary
+PUT localhost:7000/api/beneficiaries/:id
+{
+	"accountId": "ryrFJl3bZ"
+}
+
 
