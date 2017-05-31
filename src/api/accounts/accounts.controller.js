@@ -217,7 +217,7 @@ exports.postAddBeneficiary = function (req, res) {
                           res.status(400).send({ status: 'failed', message: 'Error in adding adding beneficiary !! ' + errFaU });
                         }
                         if (!updatedAC) {
-                          res.status(400).send({ status: 'failed', message: 'No Matching Account Found !! ' });
+                          res.status(400).send({ status: 'failed', message: 'No Matching Account Found to update !! ' });
                         }
                         else {
                           res.status(200).send({ status: 'success', message: 'beneficiary added successfully !', responseObj: updatedAC });
@@ -225,7 +225,6 @@ exports.postAddBeneficiary = function (req, res) {
                       });
                     }
                   });
-
 
                 }
               })

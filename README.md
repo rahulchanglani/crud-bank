@@ -140,3 +140,14 @@ O/p - SUCCESS
     "balance": 1100
   }
 }
+
+6
+POST localhost:7000/api/accounts/add-beneficiary
+POST localhost:7000/api/accounts/remove-beneficiary
+
+{
+	"accountId": "ryrFJl3bZ",
+	"beneficiaryUserId": "592e35caacc96731cfd8e9cb",
+	"beneficiaryAccountId": "SkmRH3jbZ"
+}
+
