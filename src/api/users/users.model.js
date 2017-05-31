@@ -58,8 +58,8 @@ module.exports = function (mongoose, name) {
     });
   });
 
-  userSchema.static('unsetUsrAccessToken', function (user, cb) {
-    this.update({'accountId': user.accountId}, {$set: {'accessToken': ''}}, function (err, updatedUser) {
+  userSchema.static('unsetUsrAccessToken', function (userAccountId, cb) {
+    this.update({'accountId': userAccountId}, {$set: {'accessToken': ''}}, function (err, updatedUser) {
       if (err || !updatedUser) {
         cb(err);
       }

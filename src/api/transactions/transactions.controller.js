@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
   Transactions = mongoose.model('transactions'),
   Accounts = mongoose.model('accounts');
 
-/* POST /api/transactions */
+/* POST /api/transactions Deposit or withdrawal */
 exports.create = function (req, res) {
   var transactions = new Transactions(req.body);
   // amount, transactionType, occuranceTime, accountId

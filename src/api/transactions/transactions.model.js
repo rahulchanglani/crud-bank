@@ -6,7 +6,7 @@ module.exports = function (mongoose, name) {
     amount: Number,
     transactionType: String,
     occuranceTime: {type: Date, default: Date.now},
-    accountId: {type: String, ref: 'accounts'}
+    accountId: String
   });
 
   mongoose.model(name, transactionSchema);

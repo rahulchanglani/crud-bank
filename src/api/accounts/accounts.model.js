@@ -10,9 +10,16 @@ module.exports = function (mongoose, name) {
     },
     accountType: String,
     currencyType: String,
+    bankName: String,
+    branchName: String,
+    ifscCode: String,
+    city: String,
+    state: String,
     balance: { type: Number, default: 0 },
     createdTime: { type: Date, default: Date.now },
-    transactions: [{ type: Schema.Types.ObjectId, ref: 'transactions' }]
+    transactions: [{ type: Schema.Types.ObjectId, ref: 'transactions' }],
+    beneficiaries: [{ type: Schema.Types.ObjectId, ref: 'users' }],
+    beneficiaryAccounts: [{ type: String, ref: 'accounts' }]
   });
 
   mongoose.model(name, accountSchema);
