@@ -148,6 +148,18 @@ POST localhost:7000/api/beneficiaries
   "transactionLimit": 10000
 }
 
+O/p
+
+{
+	"_id" : ObjectId("592eac0e6c74a03de46fb1f9"),
+	"addedBy" : ObjectId("592e35caacc96731cfd8e9cb"),
+	"createdTime" : ISODate("2017-05-31T11:42:06.771Z"),
+	"beneficiaryAccIds" : [
+		"ryrFJl3bZ"
+	],
+	"__v" : 0
+}
+
 
 7 Remove beneficiary
 PUT localhost:7000/api/beneficiaries/:id
@@ -155,4 +167,23 @@ PUT localhost:7000/api/beneficiaries/:id
 	"accountId": "ryrFJl3bZ"
 }
 
+O/p
+
+{
+	"_id" : ObjectId("592eac0e6c74a03de46fb1f9"),
+	"addedBy" : ObjectId("592e35caacc96731cfd8e9cb"),
+	"createdTime" : ISODate("2017-05-31T11:42:06.771Z"),
+	"beneficiaryAccIds" : [
+	],
+	"__v" : 0
+}
+
+
+8 transfer funds
+
+Transfer funds (Note that the funds can be in separate currencies. Use an API like fixer.io
+to get the latest exchange rate and then transfer funds. For the sake of simplicity, we
+assume that the bank doesn’t charge a commission fee for the exchange rate transfer)
+i. Input: Account details of the user to be sent to
+ii. Output: Status of the transaction
 

@@ -5,6 +5,7 @@ module.exports = function (mongoose, name) {
     /* Place your schema definition for model transactions here, e.g: */
     amount: Number,
     transactionType: String,
+    transactionMode: String,
     occuranceTime: {type: Date, default: Date.now},
     accountId: String
   });
