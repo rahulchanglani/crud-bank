@@ -18,14 +18,14 @@ exports.create = function (req, res) {
   console.log('create ac');
 
   var accounts = new Accounts(req.body);
-  // accountType, currencyType, bankName, branchName, ifscCode, city, state
+  // accountType, currencyType, bankName, branchName, ifscCode, city, state, country
 
   console.log('-----new account obj', accounts);
   accounts
     .save(function (err, account) {
       console.log('saving ac', err, account)
       if (err) {
-        res.status(400).send({ status: "Failure in creating New Account duue to " + err });
+        res.status(400).send({ status: "Failure in creating New Account due to " + err });
       }
       else {
         console.log('New account created ===', account);

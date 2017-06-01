@@ -15,6 +15,7 @@ module.exports = function (mongoose, name) {
     ifscCode: String,
     city: String,
     state: String,
+    country: String,
     balance: { type: Number, default: 0 },
     createdTime: { type: Date, default: Date.now },
     transactions: [{ type: Schema.Types.ObjectId, ref: 'transactions' }]
