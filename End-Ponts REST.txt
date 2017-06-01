@@ -1,4 +1,4 @@
-1
+1 Create new user account
 
 POST localhost:7000/api/accounts
 {
@@ -31,7 +31,7 @@ O/p - SUCCESS
 }
 
 
-2
+2 User account login 
 
 POST localhost:7000/api/accounts/login
 {
@@ -62,7 +62,7 @@ O/p - SUCCESS
   }
 }
 
-3
+3 Check a/c balance
 
 GET localhost:7000/api/accounts/BykW1SiWZ
 
@@ -73,11 +73,12 @@ O/p - SUCCESS
 }
 
 
-4
+4 transactions
 
 POST localhost:7000/api/transactions
 {
 	"transactionType": "deposit",
+	"transactionMode": "ATM",
 	"amount": 50
 }
 
@@ -85,6 +86,7 @@ OR
 
 {
 	"transactionType": "withdrawal",
+	"transactionMode": "ATM",
 	"amount": 50
 }
 
@@ -96,13 +98,13 @@ O/p - SUCCESS
 }
 
 
-5
+5 
 
 POST localhost:7000/api/accounts/transactions-history
 {
 	"accountId": "SkmRH3jbZ",
-	"fromDt": "",
-	"toDt": ""
+	"fromDt": "2017-05-31T13:29:45.953Z",
+	"toDt": "2017-06-01T13:29:45.953Z"
 }
 
 O/p - SUCCESS
@@ -142,7 +144,7 @@ O/p - SUCCESS
 6  Add beneficiary
 POST localhost:7000/api/beneficiaries
 {
-	"accountId": "ryrFJl3bZ",
+   "accountId": "ryrFJl3bZ",
   "transactionLimit": 10000
 }
 
@@ -177,12 +179,13 @@ O/p
 }
 
 
-8 transfer funds
+8 Transfer funds & currency exchange
 
 POST localhost:7000/api/transactions/fund-transfer
 
 {
   "transactionType": "transfer",
+"transactionMode": "Fund Transfer",
 	"amount": 500,
 	"accountId": "HyM0Lqp--"
 }
@@ -190,5 +193,6 @@ POST localhost:7000/api/transactions/fund-transfer
 O/p
 
 "transactionType": "transfer",
+"transactionMode": "Fund Transfer",
 	"amount": 500,
 	"accountId": "HyM0Lqp--"
